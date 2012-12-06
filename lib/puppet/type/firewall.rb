@@ -131,7 +131,7 @@ Puppet::Type.newtype(:firewall) do
     EOS
 
     munge do |value|
-      @resource.string_to_port(value)
+      @resource.string_to_port(value, :proto)
     end
 
     def is_to_s(value)
@@ -161,7 +161,7 @@ Puppet::Type.newtype(:firewall) do
     EOS
 
     munge do |value|
-      @resource.string_to_port(value)
+      @resource.string_to_port(value, :proto)
     end
 
     def is_to_s(value)
@@ -191,7 +191,7 @@ Puppet::Type.newtype(:firewall) do
     EOS
 
     munge do |value|
-      @resource.string_to_port(value)
+      @resource.string_to_port(value, :proto)
     end
 
     def is_to_s(value)
@@ -469,7 +469,7 @@ Puppet::Type.newtype(:firewall) do
     newvalue(/^\d+$/)
   end
 
-  newproperty(:uid, :array_matching =>:all, :required_features => :owner) do
+  newproperty(:uid, :required_features => :owner) do
     desc <<-EOS
       UID or Username owner matching rule.  Accepts a string argument
       only, as iptables does not accept multiple uid in a single
@@ -477,7 +477,7 @@ Puppet::Type.newtype(:firewall) do
     EOS
   end
 
-  newproperty(:gid, :array_matching =>:all, :required_features => :owner) do
+  newproperty(:gid, :required_features => :owner) do
     desc <<-EOS
       GID or Group owner matching rule.  Accepts a string argument
       only, as iptables does not accept multiple gid in a single

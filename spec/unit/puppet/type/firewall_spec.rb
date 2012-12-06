@@ -140,6 +140,11 @@ describe firewall do
         @resource[port].should == ['22','23']
       end
 
+      it "should accept a #{port} as a number" do
+        @resource[port] = 22
+        @resource[port].should == ['22']
+      end
+
       it "should accept a #{port} as a hyphen separated range" do
         @resource[port] = ['22-1000']
         @resource[port].should == ['22-1000']
@@ -310,19 +315,19 @@ describe firewall do
   describe ':gid and :uid' do
     it 'should allow me to set uid' do
       @resource[:uid] = 'root'
-      @resource[:uid].should == ['root']
+      @resource[:uid].should == 'root'
     end
-    it 'should allow me to set uid as an array, breaking iptables' do
+    it 'should allow me to set uid as an array, and silently hide my error' do
       @resource[:uid] = ['root', 'bobby']
-      @resource[:uid].should == ['root', 'bobby']
+      @resource[:uid].should == 'root'
     end
     it 'should allow me to set gid' do
       @resource[:gid] = 'root'
-      @resource[:gid].should == ['root']
+      @resource[:gid].should == 'root'
     end
-    it 'should allow me to set gid as an array, breaking iptables' do
+    it 'should allow me to set gid as an array, and silently hide my error' do
       @resource[:gid] = ['root', 'bobby']
-      @resource[:gid].should == ['root', 'bobby']
+      @resource[:gid].should == 'root'
     end
   end
 
