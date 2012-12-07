@@ -1,3 +1,4 @@
+
 firewall { '000 allow foo':
   dport  => [7061, 7062],
   action => accept,
